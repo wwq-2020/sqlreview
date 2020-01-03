@@ -46,13 +46,19 @@ func main() {
 					fmt.Println("index should been idx-<col>-<col>")
 					os.Exit(0)
 				}
+				for _, part := range parts[1:] {
+					if _, exist := columns[part]; !exist {
+						fmt.Println("idx should been idx-<col>-<col>")
+						os.Exit(0)
+					}
+				}
 			}
 			if constraint.Tp == ast.ConstraintUniq {
 				if len(parts) < 2 || parts[0] != "idx" {
 					fmt.Println("idx should been idx-<col>-<col>")
 					os.Exit(0)
 				}
-				for _, part := range parts[2:] {
+				for _, part := range parts[1:] {
 					if _, exist := columns[part]; !exist {
 						fmt.Println("uniq should been uniq-<col>-<col>")
 						os.Exit(0)
